@@ -77,6 +77,7 @@ module GooglePlaces
       }
 
       options[:zagatselected] = zagat_selected if zagat_selected
+      radar = options[:radar].nil? ? false : options[:radar]
 
       # Accept Types as a string or array
       if types
@@ -84,7 +85,7 @@ module GooglePlaces
         options.merge!(:types => types)
       end
 
-      request(:spots, multipage_request, exclude, options)
+      request(radar ? :spots_by_radar : :spots, multipage_request, exclude, options)
     end
 
     # Search for a Spot with a reference key
